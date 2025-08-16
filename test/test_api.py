@@ -62,7 +62,7 @@ def test_search_actor_by_name(api):
         resp = requests.get(url, headers=headers, params=params)
         resp.raise_for_status()
         data = resp.json()
-    with allure.step("проверка: в ответе код 404, в теле content-length: 0"):
+    with allure.step("проверка: в ответе код 200, nameRu='Хью Джекман"):
         assert resp.status_code == 200
         data = resp.json()
         assert 'items' in data
@@ -87,7 +87,7 @@ def test_search_nonexistent_actor_by_name(api):
         resp = requests.get(url, headers=headers, params=params)
         resp.raise_for_status()
         data = resp.json()
-    with allure.step("проверка: в ответу  код 404, в теле total: 0"):
+    with allure.step("Проверка: в ответе  код 200, в теле total: 0"):
         assert resp.status_code == 200
         assert data["total"] == 0
 
@@ -106,7 +106,7 @@ def test_search_actor_by_id(api):
         resp.raise_for_status()
         data = resp.json()
 
-    with allure.step("проверить, что ответ содержит код 404, personId = 8213"):
+    with allure.step("проверить, что ответ содержит код 200, personId = 8213"):
         assert resp.status_code == 200
         assert data["personId"] == actor_id
 
